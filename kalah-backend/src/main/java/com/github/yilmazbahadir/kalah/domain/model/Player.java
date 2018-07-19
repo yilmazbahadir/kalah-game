@@ -1,8 +1,7 @@
 package com.github.yilmazbahadir.kalah.domain.model;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>Model of the player</h1>
  *
  * @author Bahadir Yilmaz
  * @version 1.0

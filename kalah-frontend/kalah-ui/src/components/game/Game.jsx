@@ -63,7 +63,7 @@ class Game extends React.Component {
       {
         data.board.sides.sort((a, b) => a.sideId != this.state.playerId ? a.sideId : b.sideId).map((side) => (
           <div>
-            <Side id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != this.state.playerId} 
+            <Side id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != this.state.playerId} currentPlayer={data.status.nextPlayer}
               onClick={(pitInx) => this.props.play(this.state.gameId, this.state.playerId, pitInx)}/>
           <br/>
           </div>
@@ -107,7 +107,7 @@ const Pit = (props) => (
 )
 
 const Side = (props) => (
-  <div id={props.id} className={ 'side' + (props.opposite ? ' opposite' : '') }>
+  <div id={props.id} className={ 'side' + (props.opposite ? ' opposite' : '') + (props.currentPlayer == props.id ? ' playing' : '') }>
       {
         props.pits.map(
           (p) => (<Pit type={p.type} index={p.index} numOfStones={p.numOfStones} 

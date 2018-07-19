@@ -38,6 +38,17 @@ public class GameService {
         this.gamesMap = new ConcurrentHashMap<>();
     }
 
+    /**
+     * Creates a game with the parameters.
+     * It is just constructed it should be start-ed in order to play.
+     *
+     * @param name name of the game
+     * @param numOfPlayers number of the players
+     * @param numOfPits number of the pits in each side(excluding house - every side has 1 house(kalah)
+     * @param numOfStonesInEachPit number of stones in each pit
+     * @return The Game configured with status NOT_STARTED
+     * @throws GameNameAlreadyUsedException
+     */
     public Game create(String name, int numOfPlayers, int numOfPits, int numOfStonesInEachPit)
             throws GameNameAlreadyUsedException {
         Game game = new KalahGame(gameIdCounter.getAndIncrement(), name,
@@ -48,6 +59,14 @@ public class GameService {
         return game;
     }
 
+    /**
+     * Starts the game.
+     *
+     * @param gameId
+     * @return
+     * @throws GameIdNotFoundException
+     * @throws NoAvailableSeatsException
+     */
     public Game start(long gameId) throws GameIdNotFoundException, NoAvailableSeatsException {
         Game game = this.gamesMap.get(gameId);
         if (game == null) {
@@ -62,13 +81,22 @@ public class GameService {
     /**
      * Removes the game with the given name parameter
      *
-     * @param gameId Game's ID
-     * @return The Game deleted
+     * @param gameId ID of the game
+     * @return Game deleted
      */
     public Game delete(long gameId) {
         return this.gamesMap.remove(gameId);
     }
 
+    /**
+     * Joins a player to a game with a playerName.
+     *
+     * @param gameId ID of the game
+     * @param playerName Name of the player
+     * @return The model of the Player
+     * @throws GameIdNotFoundException
+     * @throws NoAvailableSeatsException
+     */
     public Player join(long gameId, String playerName) throws GameIdNotFoundException, NoAvailableSeatsException {
         Game game = this.gamesMap.get(gameId);
         if (game == null) {
@@ -82,6 +110,15 @@ public class GameService {
         game.getStatus().setStatusType(GameStatusType.WAITING_FOR_NEXT_PLAYER); //TODO change here ??!
         return player;
     }
+
+    /**
+     * Makes the player leave the game
+     *
+     * @param gameId
+     * @param playerId
+     * @return
+     * @throws GameIdNotFoundException
+     */
     public Game leave(long gameId, int playerId) throws GameIdNotFoundException {
         Game game = this.gamesMap.get(gameId);
         if (game == null) {
@@ -114,6 +151,19 @@ public class GameService {
         return game;
     }
 
+    /**
+     * Makes move for a player
+     *
+     * @param gameId ID of the Game
+     * @param playerId ID of the player
+     * @param pitInx Index of the Pit to be picked( range 0(inclusive) - numOfPits(exclusive) )
+     * @return
+     * @throws GameIdNotFoundException
+     * @throws PlayerInvalidTurnException
+     * @throws GameStatusException
+     * @throws WrongMoveException
+     * @throws InvalidPitIndexException
+     */
     public Game play(long gameId, int playerId, int pitInx) throws GameIdNotFoundException, PlayerInvalidTurnException,
             GameStatusException, WrongMoveException, InvalidPitIndexException {
         Game game = this.gamesMap.get(gameId);
@@ -125,6 +175,11 @@ public class GameService {
         return game;
     }
 
+    /**
+     * Sends the Game Events to Subscribers
+     *
+     * @param e Event
+     */
     private void sendGameEvent(Game.GameEvent e) {
         this.messagingTemplate.convertAndSend("/topic/kalah", e);
     }

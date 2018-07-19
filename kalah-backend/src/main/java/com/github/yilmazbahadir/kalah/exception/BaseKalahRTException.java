@@ -1,8 +1,7 @@
 package com.github.yilmazbahadir.kalah.exception;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * Runtime base exception of the game exceptions
  *
  * @author Bahadir Yilmaz
  * @version 1.0

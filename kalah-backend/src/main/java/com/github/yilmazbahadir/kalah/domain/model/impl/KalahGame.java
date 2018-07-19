@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -145,12 +146,14 @@ public class KalahGame implements Game {
                 currentSideId = nextSideId % numOfPlayers;
             }
         }
-        // check if the game is finished
-        if (this.getBoard().getSide(playerId).getTotalNumOfStonesInPits().intValue() == 0) {
+        // check if the game is finished, if any player's pits are empty then it is finished
+        if (Arrays.stream(this.getBoard().getSides()).anyMatch(s -> s.getTotalNumOfStonesInPits().intValue() == 0)) {
+            // then all stones in the own pits will be put in owning players' houses
+            Arrays.stream(this.getBoard().getSides()).forEach(s -> s.getHouse().sow(Arrays.stream(s.getPits()).mapToInt(p -> p.pick()).sum()));
             this.getStatus().setStatusType(GameStatusType.FINISHED);
             this.getStatus().setNextPlayer(-1); //an invalid value
         } else {
-            this.getStatus().setNextPlayer(nextPlayer); // TODO update this line
+            this.getStatus().setNextPlayer(nextPlayer);
             this.getStatus().setStatusType(GameStatusType.WAITING_FOR_NEXT_PLAYER);
         }
         GameEvent evt = new GameEvent();

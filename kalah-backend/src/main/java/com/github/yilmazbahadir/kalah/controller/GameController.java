@@ -88,6 +88,9 @@ public class GameController {
     }
 
 
+    /**
+     * Model class for the createGame rest service
+     * */
     @Getter
     @Setter
     @AllArgsConstructor

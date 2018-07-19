@@ -11,8 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>This class is responsible for logging</h1>
+ *
+ * Logs each method call if trace is enabled.
+ * Logs each exception in the system.
+ *
  *
  * @author Bahadir Yilmaz
  * @version 1.0

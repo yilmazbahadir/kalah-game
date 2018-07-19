@@ -1,12 +1,15 @@
 package com.github.yilmazbahadir.kalah.domain.model;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>Configuration of the game</h1>
+ * This class is responsible for the configration of the game to be played.
+ * Number of players(sides), number of pits in each side, number of stones in each pit can be configured
+ * (even the direction of the game)
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -15,6 +18,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
+@EqualsAndHashCode
 public class GameConfig {
 
     private static final int DEFAULT_NUM_OF_PITS = 6;

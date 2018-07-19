@@ -129,7 +129,8 @@ div .house div{
   width: 70%;
   height: 100%;
   justify-content:space-between;
-  margin-left: 10.5%
+  margin-left: 10.5%;
+  background-color: #FFAB91;
 }
 .opposite {
   margin-left: 0;
@@ -138,4 +139,7 @@ div .house div{
     -o-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
+}
+.playing {
+  background-color:#9CCC65;
 }

@@ -5,8 +5,8 @@ import lombok.Getter;
 import java.util.Arrays;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>Error Codes</h1>
+ * Enumeration of the error codes mapped to exceptions
  *
  * @author Bahadir Yilmaz
  * @version 1.0

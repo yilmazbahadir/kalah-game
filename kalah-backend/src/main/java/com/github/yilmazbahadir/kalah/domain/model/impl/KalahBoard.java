@@ -7,8 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -24,7 +22,7 @@ public class KalahBoard implements Board {
 
     /**
      * @param numOfSides           total number of sides / players
-     * @param numOfPits            number of pits including houses.
+     * @param numOfPits            number of pits excluding houses.
      * @param numOfStonesInEachPit number of stones in each pit
      */
     public KalahBoard(int numOfSides, int numOfPits, int numOfStonesInEachPit) {
@@ -38,4 +36,7 @@ public class KalahBoard implements Board {
         return this.sides[sideId];
     }
 
+    public Side[] getSides() {
+        return this.sides;
+    }
 }

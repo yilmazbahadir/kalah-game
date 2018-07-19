@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>Game Controller Exception Handler</h1>
+ * It catches the exceptions thrown by the controllers
+ * and returns system friendly, structured response with error code and the message
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -20,8 +21,7 @@ public class GameControllerExceptionHandler {
 
     @ExceptionHandler(BaseKalahException.class)
     public ResponseEntity<KalahResponse> handleException(BaseKalahException e) {
-        //TODO feed the event pusher (websocket) ?
-        return ResponseEntity.badRequest().body(
+        return ResponseEntity.badRequest().body( // http status 400
                 KalahResponse.builder()
                     .success(false)
                     .errCode(ErrCode.valueOf(e.getClass().getSimpleName()).getCode())

@@ -1,8 +1,7 @@
 package com.github.yilmazbahadir.kalah.domain.model;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * Represent the states that a game can be in.
  *
  * @author Bahadir Yilmaz
  * @version 1.0

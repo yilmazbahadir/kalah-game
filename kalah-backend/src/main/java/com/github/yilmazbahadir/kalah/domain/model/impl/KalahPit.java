@@ -11,8 +11,6 @@ import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
  *
  * @author Bahadir Yilmaz
  * @version 1.0

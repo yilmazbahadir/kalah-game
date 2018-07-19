@@ -10,13 +10,19 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
+/**
+ * Configuration class of Kalah Game Application
+ *
+ * @author Bahadir Yilmaz
+ * @version 1.0
+ * Date:   Jul 2018
+ */
+
 @Configuration
 @EnableSwagger2
-//@EnableAspectJAutoProxy
-@EnableScheduling
 public class KalahGameAppConfig {
 
-    // TODO configure this section !
 
     @Bean
     public Docket api() {

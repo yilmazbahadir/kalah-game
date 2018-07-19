@@ -11,8 +11,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * Model of the whole game
+ *
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -24,7 +24,11 @@ public interface Game extends BaseModel {
 
     public long getId();
 
+    public String getName();
+    
     public GameStatus getStatus();
+
+    public GameConfig getConfig();
 
     /**
      * Decides which player should start(strategy: random) and starts the game
@@ -39,8 +43,6 @@ public interface Game extends BaseModel {
     public List<Player> leave(long playerId);
 
     public List<Player> getPlayers();
-
-    public GameConfig getConfig();
 
     public interface GameEventListener {
         public void handle(GameEvent e);

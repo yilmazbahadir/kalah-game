@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>Contorller(Rest API) Response Model</h1>
  *
  * @author Bahadir Yilmaz
  * @version 1.0

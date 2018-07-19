@@ -16,6 +16,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.startsWith;
 
+/**
+ * <h1>Game Rest API Integration Test Class</h1>
+ * Contains the test steps of a scenario
+ *
+ * @author Bahadir Yilmaz
+ * @version 1.0
+ * Date:   Jul 2018
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = KalahGameApp.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

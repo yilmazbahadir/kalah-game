@@ -1,8 +1,7 @@
 package com.github.yilmazbahadir.kalah.exception;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * Should be thrown when game is full - there is no available seats
  *
  * @author Bahadir Yilmaz
  * @version 1.0

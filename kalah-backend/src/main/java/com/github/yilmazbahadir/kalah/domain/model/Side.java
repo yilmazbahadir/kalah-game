@@ -3,8 +3,7 @@ package com.github.yilmazbahadir.kalah.domain.model;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <H1>Model of the player's side</H1>
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -14,6 +13,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public interface Side extends BaseModel {
 
     public Pit getPit(int pitIndex);
+
+    public Pit[] getPits();
 
     public Pit getHouse();
 

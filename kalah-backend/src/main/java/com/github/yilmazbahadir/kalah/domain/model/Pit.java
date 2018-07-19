@@ -7,8 +7,8 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * <h1>Model of the pit</h1>
+ * Pickable, sowable model of the pit takes place in each side.
  *
  * @author Bahadir Yilmaz
  * @version 1.0

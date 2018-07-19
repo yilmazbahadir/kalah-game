@@ -7,8 +7,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ *This class is responsible of WebSocket Configuration
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -21,14 +20,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
-        config.setApplicationDestinationPrefixes("/request");
+        config.enableSimpleBroker("/topic"); // topic, clients subscribe for events
+        config.setApplicationDestinationPrefixes("/request"); // request, destination for the messages clients sent
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry
-                .addEndpoint("/kalah/websocket")
+                .addEndpoint("/kalah/websocket") // endpoint that clients connect
                 .setAllowedOrigins("*")
                 .withSockJS();
     }

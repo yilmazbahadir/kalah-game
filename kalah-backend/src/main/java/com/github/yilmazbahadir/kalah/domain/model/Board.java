@@ -1,8 +1,9 @@
 package com.github.yilmazbahadir.kalah.domain.model;
 
+import java.util.List;
+
 /**
- * <h1><What does it do ?></h1>
- * <A simple explanation>
+ * Board model of a game
  *
  * @author Bahadir Yilmaz
  * @version 1.0
@@ -13,4 +14,5 @@ public interface Board extends BaseModel {
 
     public Side getSide(int sideId);
 
+    public Side[] getSides();
 }
