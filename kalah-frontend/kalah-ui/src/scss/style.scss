@@ -1,0 +1,141 @@
+
+@import 'mixins';
+
+body, html {
+  @include full-height;
+  font: $font-stack;
+}
+
+#kalah-app {
+  @include margin(0px);
+  @include full-height;
+}
+
+code {
+  font-size: 1.1rem;
+  color: hsl(0, 0%, 29%)
+}
+
+.notification code {
+  background: hsl(0, 0%, 90%)
+}
+
+pre {
+  font-size: .9rem;
+  margin: 0;
+  background-color: whitesmoke;
+  counter-reset: line-numbering;
+  font-family: Inconsolata, Consolas, monospace;
+  padding: 5px;
+  border-radius: 3px;
+  color: #455A64;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+pre .line::before {
+  content: counter(line-numbering);
+  counter-increment: line-numbering;
+  padding-right: 1em;
+  /* space after numbers */
+  width: 1.5em;
+  text-align: right;
+  font-weight: 600;
+  font-size: .9rem;
+  color: #209cee;
+}
+
+.m-left--small {
+  margin-left: 0.5rem;
+}
+
+.m-right--small {
+  margin-right: 0.5rem;
+}
+
+.m-top--small {
+  margin-top: 0.5rem;
+}
+
+.m-bottom--small {
+  margin-bottom: 0.5rem;
+}
+
+.m--small {
+  margin: 0.5rem;
+}
+
+.m-left--large {
+  margin-left: 1rem;
+}
+
+.m-right--large {
+  margin-right: 1rem;
+}
+
+.m-top--large {
+  margin-top: 1rem;
+}
+
+.m-bottom--large {
+  margin-bottom: 1rem;
+}
+
+.m-large {
+  margin: 1rem;
+}
+
+
+// Bulma overrides
+
+.navbar-item img {
+  max-height: none;
+}
+
+.notification a:not(.button) {
+  text-decoration: none;
+}
+
+// Kalah Board
+
+.house {
+  @include Pit(200);
+  width: 100px;
+  height: 200px;
+  background-color: #209cee;
+  margin-bottom: 20px;
+}
+
+div .pit {
+  @include Pit(100);
+}
+
+div .pit div{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 90px;
+  font-size: 40px;
+}
+
+div .house div{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 90px;
+  font-size: 50px;
+}
+
+.side  {
+  display: flex;
+  width: 70%;
+  height: 100%;
+  justify-content:space-between;
+  margin-left: 10.5%
+}
+.opposite {
+  margin-left: 0;
+  -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}

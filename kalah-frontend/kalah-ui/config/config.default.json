@@ -1,0 +1,10 @@
+{
+  "kalahNodejs": {
+    "port": 3060,
+    "baseUrl": "http://localhost:3020/"
+  },
+  "kalah-backend": {
+    "port":8080,
+    "baseUrl":"http://localhost:8080/"
+  }
+}

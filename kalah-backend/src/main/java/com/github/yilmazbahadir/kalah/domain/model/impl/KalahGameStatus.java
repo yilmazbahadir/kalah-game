@@ -1,0 +1,56 @@
+package com.github.yilmazbahadir.kalah.domain.model.impl;
+
+import com.github.yilmazbahadir.kalah.domain.model.GameStatus;
+import com.github.yilmazbahadir.kalah.domain.model.GameStatusType;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+/**
+ * <h1><What does it do ?></h1>
+ * <A simple explanation>
+ *
+ * @author Bahadir Yilmaz
+ * @version 1.0
+ * Date:   Jul 2018
+ */
+@ToString
+public class KalahGameStatus implements GameStatus {
+
+    private int currentPlayer;
+    private int nextPlayer;
+    private GameStatusType statusType;
+
+    public KalahGameStatus(final GameStatusType statusType) {
+        this.statusType = statusType;
+    }
+
+    @Override
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    @Override
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    @Override
+    public int getNextPlayer() {
+        return nextPlayer;
+    }
+
+    public void setNextPlayer(int nextPlayer) {
+        this.nextPlayer = nextPlayer;
+    }
+
+    @Override
+    public GameStatusType getStatusType() {
+        return statusType;
+    }
+
+    @Override
+    public void setStatusType(GameStatusType statusType) {
+        this.statusType = statusType;
+    }
+}
