@@ -56,7 +56,8 @@ public class KalahGameTest {
 
     }
 
-    @Test void testPlay() {
+    @Test
+    public void testPlay() {
 
     }
 }
