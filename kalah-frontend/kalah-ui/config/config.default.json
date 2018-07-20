@@ -6,5 +6,8 @@
   "kalah-backend": {
     "port":8080,
     "baseUrl":"http://localhost:8080/"
+  },
+  "kalah-websocket-server": {
+    "url":"http://localhost:8080/kalah/websocket"
   }
 }

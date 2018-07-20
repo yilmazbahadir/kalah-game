@@ -1,22 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
 import { fetchGame, play } from '../../redux/actions/thunks';
 import { connect } from 'react-redux';
-import PlayArrow from '@material-ui/icons/PlayArrow';
-import Tooltip from '@material-ui/core/Tooltip';
 import CreateGameDialog from './CreateGameDialog';
-import JoinGame from './JoinGame';
-import Flex from './../common/glamorous/Flex';
 import SockJsClient from 'react-stomp';
+import MessagePrompter from './MessagePrompter';
+import ConfigService from './../../services/common/config-service'
 
 class Game extends React.Component {
   constructor(props) {
@@ -42,37 +30,45 @@ class Game extends React.Component {
     if (!this.state.game) return <span />;
 
     const { error, data, isFetching } = this.state.game;
-    let content = null;
+    let content = null, messageContent='';
 
     if (isFetching) {
-        content = <span>Loading!</span>;
+        return <span>Loading!</span>;
     } else if (error) {
-        content =  <span>{ error.message }</span>
+        messageContent =  (<MessagePrompter id='gamePlayMessage' open={true} message={error.response.data.message} />);
     } else if(data && data.data == null) {
         content = (<div><span>No game found!</span><br/>
         {this.createNewGameButton(this.props)}</div>);   
+        return content;
     } else {
-        content = this.createGameContent(data.data);
+      this.gameData = data.data;
     }
+
+    content = this.createGameContent(this.gameData, messageContent);
+    
     
     return content;
   }
   
-  createGameContent(data) {
+  createGameContent(data, messageContent) {
+    let viewer = this.state.playerId;
     return ( <div>
-      {
-        data.board.sides.sort((a, b) => a.sideId != this.state.playerId ? a.sideId : b.sideId).map((side) => (
+      { messageContent }
+      { 
+        data.board.sides.slice().sort((a, b) => a.sideId != viewer ? a.sideId : b.sideId).map((side) => (
           <div>
-            <Side id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != this.state.playerId} currentPlayer={data.status.nextPlayer}
-              onClick={(pitInx) => this.props.play(this.state.gameId, this.state.playerId, pitInx)}/>
+            <Side id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != viewer} currentPlayer={data.status.nextPlayer}
+              onClick={(pitInx) => this.props.play(this.state.gameId, viewer, pitInx)} 
+              isWinner={data.status.statusType === 'FINISHED' ? this.getWinner(data) == side.sideId : false}/>
           <br/>
           </div>
         ))
 
       }     
-        <GameStatus currentPlayer={data.status.currentPlayer} nextPlayer={data.status.nextPlayer} statusType={data.status.statusType} />
+        <GameStatus viewer={viewer} currentPlayer={data.status.currentPlayer} nextPlayer={data.status.nextPlayer} statusType={data.status.statusType} 
+          winner={data.status.statusType === 'FINISHED' ? this.getWinner(data) : -1}/>
         <SockJsClient
-                    url={`http://localhost:8080/kalah/websocket`}
+                    url={ConfigService.getWebSocketUrl()}
                     topics={['/topic/kalah']}
                     onMessage={(gameEvent) => this.handleEvent(gameEvent)} />
       </div>
@@ -82,20 +78,24 @@ class Game extends React.Component {
   createNewGameButton(props) {
     let open = false;
     return (
-    <div><br />
-        <CreateGameDialog open={open} onCreated={() => {props.fetchGame(this.props.match.params.gameId); this.forceUpdate();}}/>
+        <div>
+          <br />
+          <CreateGameDialog open={open} onCreated={() => {props.fetchGame(this.props.match.params.gameId); this.forceUpdate();}}/>
         </div>);
   }
 
   handleEvent(gameEvent) {
-    //alert('Event geldi. Event:' + JSON.stringify(gameEvent));
     let game = this.state.game;
     game.data.data = gameEvent.game;
 
     this.setState({
       game: game
     })
-  } 
+  }
+
+  getWinner(data) { // TODO implement state of tie, what if no winners ?
+    return data.board.sides.reduce((s1, s2) => (s1.house.numOfStones > s2.house.numOfStones ? s1 : s2)).sideId;
+  }
 }
 
 
@@ -107,7 +107,8 @@ const Pit = (props) => (
 )
 
 const Side = (props) => (
-  <div id={props.id} className={ 'side' + (props.opposite ? ' opposite' : '') + (props.currentPlayer == props.id ? ' playing' : '') }>
+  <div id={props.id} className={ 'side' + (props.opposite ? ' opposite' : '') + (props.currentPlayer == props.id ? ' playing' : '') + (props.isWinner ? ' winner' : '') }>
+      <span style={{ whiteSpace: 'nowrap' }}>Player #{props.id} </span>
       {
         props.pits.map(
           (p) => (<Pit type={p.type} index={p.index} numOfStones={p.numOfStones} 
@@ -125,6 +126,14 @@ const GameStatus = (props) => (
     <span>Next player is {props.nextPlayer} </span>
     <br/>
     <div> Game status: {props.statusType} </div>
+    <br/>
+    { props.winner > -1 &&
+        <div>
+          <MessagePrompter id='gameStatusMessage' open={true} 
+            message={props.winner == props.viewer ? 'You win! Perfect!' : 'You lost :( The winner is: Player #' + props.winner}  type='success'/>
+           {props.winner == props.viewer ? 'You win! Perfect!' : 'You lost :( The winner is: Player #' + props.winner} 
+        </div>
+    }
   </div>
 )
 

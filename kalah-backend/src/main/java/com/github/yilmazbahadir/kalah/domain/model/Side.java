@@ -12,6 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public interface Side extends BaseModel {
 
+    public long getSideId();
+
     public Pit getPit(int pitIndex);
 
     public Pit[] getPits();

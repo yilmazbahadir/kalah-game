@@ -28,5 +28,8 @@ module.exports = {
     },
     getBaseUrl () {
         return this.getRequiredProperty('kalah-backend.baseUrl');
+    },
+    getWebSocketUrl() {
+        return this.getRequiredProperty('kalah-websocket-server.url');
     }
 };
