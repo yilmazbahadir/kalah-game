@@ -124,7 +124,9 @@ const Side = (props) => (
 )
 const GameStatus = (props) => (
   <div>
-    <span>Player {props.currentPlayer} has played. </span>
+    { props.currentPlayer > -1 && 
+      <span>Player {props.currentPlayer} has played. </span>
+    }
     <br/>
     <span>Next player is {props.nextPlayer} </span>
     <br/>
@@ -135,6 +137,13 @@ const GameStatus = (props) => (
           <MessagePrompter id='gameStatusMessage' open={true} 
             message={props.winner == props.viewer ? 'You win! Perfect!' : 'You lost :( The winner is: Player #' + props.winner}  type='success'/>
            {props.winner == props.viewer ? 'You win! Perfect!' : 'You lost :( The winner is: Player #' + props.winner} 
+        </div>
+    }
+
+    { props.currentPlayer == props.nextPlayer &&
+        <div>
+          <MessagePrompter id='gameStatusMessage' open={true} 
+            message={'Player #' + props.currentPlayer + ' have a free turn!'}  type='success'/>
         </div>
     }
   </div>

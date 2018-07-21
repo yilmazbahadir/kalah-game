@@ -10,7 +10,7 @@ package com.github.yilmazbahadir.kalah.domain.model;
 
 public interface Player extends BaseModel {
 
-    public long getId();
+    public int getId();
 
     public String getName();
 

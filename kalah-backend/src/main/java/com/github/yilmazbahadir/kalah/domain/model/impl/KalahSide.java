@@ -9,6 +9,8 @@ import lombok.ToString;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * Kalah implementation of the Side model.
+ *
  * @author Bahadir Yilmaz
  * @version 1.0
  * Date:   Jul 2018
@@ -31,19 +33,14 @@ public class KalahSide implements Side {
         for (; i < numOfPits; i++) {
             this.pits[i] = new KalahPit(numOfStonesInEachPit, i,
                     e -> {
-                        switch (e.getType()) {
-                            case PIT_SOWED:
-                                this.totalNumOfStonesInPits.incrementAndGet();
-                                break;
-                            case PIT_PICKED:
+                        if (Pit.PitEventType.PIT_SOWED == e.getType()) {
+                            this.totalNumOfStonesInPits.incrementAndGet();
+                        } else if(Pit.PitEventType.PIT_PICKED == e.getType()) {
                                 this.totalNumOfStonesInPits.accumulateAndGet(e.getBeforeNumOfStones(), (x, y) -> x - y);
-                                break;
                         }
                     });
         }
-        this.house = new KalahPit(0, i, KalahPit.PitType.HOUSE, t -> {
-            // TODO fire score event
-        });
+        this.house = new KalahPit(0, i, KalahPit.PitType.HOUSE, t -> {});
 
     }
 

@@ -29,13 +29,11 @@ public class LoggingAspect {
      *
      * @param joinPoint join point for advice
      * */
-    @Around("execution(* com.github.yilmazbahadir.kalah.service.*.*(..))") // TODO controllers ?
+    @Around("execution(* com.github.yilmazbahadir.kalah.service.*.*(..))")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object value = null;
         try {
             value = joinPoint.proceed();
-        } catch (Throwable throwable) {
-            throw throwable;
         } finally {
             log.trace("### < Method {}.{}({}) is invoked and returned {} >",
                     joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(), joinPoint.getArgs(), value);

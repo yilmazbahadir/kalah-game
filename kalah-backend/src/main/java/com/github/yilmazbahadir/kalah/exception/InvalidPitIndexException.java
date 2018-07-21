@@ -10,6 +10,6 @@ package com.github.yilmazbahadir.kalah.exception;
 public class InvalidPitIndexException extends BaseKalahException {
 
     public InvalidPitIndexException(int pitInx) {
-        super(String.format("Invalid pit index:%s", pitInx)); //TODO string internationalization
+        super(String.format("Invalid pit index:%s", pitInx));
     }
 }

@@ -19,6 +19,8 @@ public class KalahGameStatus implements GameStatus {
 
     public KalahGameStatus(final GameStatusType statusType) {
         this.statusType = statusType;
+        this.currentPlayer = -1;
+        this.nextPlayer = 0;
     }
 
     @Override

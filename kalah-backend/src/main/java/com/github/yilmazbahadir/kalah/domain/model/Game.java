@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Model of the whole game
+ * Abstract model of the whole game
  *
  *
  * @author Bahadir Yilmaz
@@ -31,9 +31,9 @@ public interface Game extends BaseModel {
     public GameConfig getConfig();
 
     /**
-     * Decides which player should start(strategy: random) and starts the game
+     * Decides which player should start(e.g. strategy: random) and starts the game
      */
-    public void start();
+    public int start();
 
     public GameStatus play(int playerId, int pitInx) throws GameStatusException, PlayerInvalidTurnException,
             WrongMoveException, InvalidPitIndexException;
@@ -44,6 +44,7 @@ public interface Game extends BaseModel {
 
     public List<Player> getPlayers();
 
+    @FunctionalInterface
     public interface GameEventListener {
         public void handle(GameEvent e);
     }

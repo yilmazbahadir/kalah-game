@@ -8,6 +8,6 @@ package com.github.yilmazbahadir.kalah.exception;
 public class GameIdNotFoundException extends BaseKalahException {
 
     public GameIdNotFoundException(long id) {
-        super(String.format("Game ID:%s  not found! Please try another one.", id)); //TODO string internationalization
+        super(String.format("Game ID:%s  not found! Please try another one.", id));
     }
 }

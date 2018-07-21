@@ -10,6 +10,6 @@ package com.github.yilmazbahadir.kalah.exception;
 public class GameStatusException extends BaseKalahException {
 
     public GameStatusException(String status) {
-        super(String.format("Game is in an invalid state to play. Status is %s", status)); //TODO string internationalization
+        super(String.format("Game is in an invalid state to play. Status is %s", status));
     }
 }

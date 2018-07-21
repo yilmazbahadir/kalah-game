@@ -50,10 +50,9 @@ public class GameService {
      * @return The Game configured with status NOT_STARTED
      * @throws GameNameAlreadyUsedException
      */
-    public Game create(String name, int numOfPlayers, int numOfPits, int numOfStonesInEachPit)
-            throws GameNameAlreadyUsedException {
+    public Game create(String name, int numOfPlayers, int numOfPits, int numOfStonesInEachPit) {
         Game game = new KalahGame(gameIdCounter.getAndIncrement(), name,
-                e -> sendGameEvent(e), GameConfig.builder().numOfPlayers(numOfPlayers).numOfPits(numOfPits)
+                this::sendGameEvent, GameConfig.builder().numOfPlayers(numOfPlayers).numOfPits(numOfPits)
                 .numOfStonesInEachPit(numOfStonesInEachPit).build());
         this.gamesMap.put(game.getId(), game);
 
@@ -68,7 +67,7 @@ public class GameService {
      * @throws GameIdNotFoundException
      * @throws NoAvailableSeatsException
      */
-    public Game start(long gameId) throws GameIdNotFoundException, NoAvailableSeatsException {
+    public Game start(long gameId) throws GameIdNotFoundException {
         Game game = this.gamesMap.get(gameId);
         if (game == null) {
             throw new GameIdNotFoundException(gameId);
@@ -108,7 +107,6 @@ public class GameService {
         }
 
         Player player = game.join(playerName);
-        game.getStatus().setStatusType(GameStatusType.WAITING_FOR_NEXT_PLAYER); //TODO change here ??!
         return player;
     }
 
@@ -136,7 +134,7 @@ public class GameService {
      * @return collection of all games
      */
     public List<Game> list() {
-        return new ArrayList<Game>(this.gamesMap.values());
+        return new ArrayList<>(this.gamesMap.values());
     }
 
     /**
@@ -172,7 +170,8 @@ public class GameService {
             throw new GameIdNotFoundException(gameId);
         }
 
-        GameStatus gameStatus = game.play(playerId, pitInx);
+        game.play(playerId, pitInx);
+
         return game;
     }
 

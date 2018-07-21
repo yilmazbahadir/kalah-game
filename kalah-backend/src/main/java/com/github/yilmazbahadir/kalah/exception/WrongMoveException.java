@@ -10,6 +10,6 @@ package com.github.yilmazbahadir.kalah.exception;
 public class WrongMoveException extends BaseKalahException {
 
     public WrongMoveException(String msg) {
-        super(String.format("Wrong move! %s", msg)); //TODO string internationalization
+        super(String.format("Wrong move! %s", msg));
     }
 }
