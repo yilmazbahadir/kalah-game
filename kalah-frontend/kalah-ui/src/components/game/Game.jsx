@@ -2,30 +2,34 @@ import React from 'react';
 import { fetchGame, play } from '../../redux/actions/thunks';
 import { connect } from 'react-redux';
 import CreateGameDialog from './CreateGameDialog';
-import SockJsClient from 'react-stomp';
 import MessagePrompter from './MessagePrompter';
 import ConfigService from './../../services/common/config-service'
+import SockJS from 'sockjs-client';
+
+var Stomp = require("stompjs/lib/stomp.js").Stomp;
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
+    let {gameId, playerId} = this.props.match.params; 
     this.state = {
-        playerId: this.props.match.params.playerId,
-        gameId: this.props.match.params.gameId,
+        playerId: playerId,
+        gameId: gameId,
         game: {data: [], error:null, isFetching: true}
       };
-    
   }
     
   componentDidMount() {
     this.props.fetchGame(this.props.match.params.gameId);
+    connectToWebSocket(ConfigService.getWebSocketUrl(), '/topic/kalah/' + this.props.match.params.gameId, 
+    this.handleEvent.bind(this));
   } 
 
   componentWillReceiveProps(nextProps) {
     this.setState({
         game: nextProps.game
     })
-}
+  }
   render() {
     if (!this.state.game) return <span />;
 
@@ -67,10 +71,7 @@ class Game extends React.Component {
       }     
         <GameStatus viewer={viewer} currentPlayer={data.status.currentPlayer} nextPlayer={data.status.nextPlayer} statusType={data.status.statusType} 
           winner={data.status.statusType === 'FINISHED' ? this.getWinner(data) : -1}/>
-        <SockJsClient
-                    url={ConfigService.getWebSocketUrl()}
-                    topics={['/topic/kalah/' + data.id]}
-                    onMessage={(gameEvent) => this.handleEvent(gameEvent)} />
+        
       </div>
     );
   }
@@ -85,12 +86,14 @@ class Game extends React.Component {
   }
 
   handleEvent(gameEvent) {
-    let game = this.state.game;
-    game.data.data = gameEvent.game;
+    if(gameEvent) {
+      let game = this.state.game;
+      game.data.data = gameEvent.game;
 
-    this.setState({
-      game: game
-    })
+      this.setState({
+        game: game
+      })
+    }
   }
 
   getWinner(data) { // TODO implement state of tie, what if no winners ?
@@ -136,6 +139,17 @@ const GameStatus = (props) => (
     }
   </div>
 )
+
+const connectToWebSocket = (url, topic, messageHandler) => {
+  var socket = new SockJS(url);
+  var stompClient = Stomp.over(socket);
+  stompClient.connect({}, function(frame) {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe(topic, function(message){
+        messageHandler(JSON.parse(message.body));
+      });
+  });
+}
 
 Game.propTypes = {
 };
