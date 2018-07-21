@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * <h1>Configuration of the game</h1>
  * This class is responsible for the configration of the game to be played.
@@ -19,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class GameConfig {
+public class GameConfig implements Serializable {
 
     private static final int DEFAULT_NUM_OF_PITS = 6;
     private static final int DEFAULT_NUM_OF_STONES_IN_EACH_PIT = 6;

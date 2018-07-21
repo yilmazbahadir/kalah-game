@@ -69,7 +69,7 @@ class Game extends React.Component {
           winner={data.status.statusType === 'FINISHED' ? this.getWinner(data) : -1}/>
         <SockJsClient
                     url={ConfigService.getWebSocketUrl()}
-                    topics={['/topic/kalah']}
+                    topics={['/topic/kalah/' + data.id]}
                     onMessage={(gameEvent) => this.handleEvent(gameEvent)} />
       </div>
     );

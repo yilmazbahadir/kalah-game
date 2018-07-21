@@ -57,6 +57,9 @@ public interface Game extends BaseModel {
 
     public enum GameEventType {
         GAME_REFRESH_EVENT
-        //TODO ? SCORE_EVENT, GAME_STATUS_EVENT, ALL_PLAYERS_JOINED, PLAYER_LEFT, PLAYER_FREE_TURN, GAME_FINISHED
+        // SCORE_EVENT, GAME_STATUS_EVENT, ALL_PLAYERS_JOINED, PLAYER_LEFT, PLAYER_FREE_TURN, GAME_FINISHED
+
+        /* almost all types of events require game to be refreshed(gamestatus, sides, pits), sending
+            all events separately would be inefficient; so decided to use GAME_REFRESH_EVENT only. */
     }
 }

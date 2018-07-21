@@ -1,7 +1,5 @@
 package com.github.yilmazbahadir.kalah.domain.model;
 
-import java.util.List;
-
 /**
  * Board model of a game
  *

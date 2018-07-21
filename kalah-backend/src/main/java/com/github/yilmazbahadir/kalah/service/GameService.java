@@ -7,11 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -181,6 +182,6 @@ public class GameService {
      * @param e Event
      */
     private void sendGameEvent(Game.GameEvent e) {
-        this.messagingTemplate.convertAndSend("/topic/kalah", e);
+        this.messagingTemplate.convertAndSend(String.format("/topic/kalah/%s", e.getGame().getId()), e);
     }
 }

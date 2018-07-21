@@ -8,6 +8,9 @@ import java.util.Arrays;
  * <h1>Error Codes</h1>
  * Enumeration of the error codes mapped to exceptions
  *
+ * <i>Normally constants should be capitalized but in the enum
+ * contstants exactly match exception names on purpose.</i>
+ *
  * @author Bahadir Yilmaz
  * @version 1.0
  * Date:   Jul 2018

@@ -9,7 +9,6 @@ import com.github.yilmazbahadir.kalah.exception.WrongMoveException;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -45,7 +44,7 @@ public class KalahGame implements Game {
     private GameHistory history; //TODO nice to have
 
     @JsonIgnore
-    private GameEventListener eventListener;
+    private transient GameEventListener eventListener;
 
 
     private AtomicInteger playerCounter = new AtomicInteger(0);

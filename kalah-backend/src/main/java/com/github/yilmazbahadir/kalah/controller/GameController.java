@@ -33,7 +33,7 @@ public class GameController {
     @ApiOperation(value = "Create a game")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     ResponseEntity<KalahResponse<Game>> createGame(@RequestBody GameCreateRequest req) throws GameNameAlreadyUsedException {
-        Game game = this.gameService.create(req.getName(), req.getNumOfPlayers(), req.getNumOfPits(), req.getNumOfStonesInEachPit());;
+        Game game = this.gameService.create(req.getName(), req.getNumOfPlayers(), req.getNumOfPits(), req.getNumOfStonesInEachPit());
 
         return ResponseEntity.ok(new KalahResponse(game));
     }
@@ -41,7 +41,7 @@ public class GameController {
     @ApiOperation(value = "Start a game previously created")
     @RequestMapping(value = "/{gameId}/start", method = RequestMethod.GET)
     ResponseEntity<KalahResponse<Game>> startGame(@PathVariable long gameId) throws NoAvailableSeatsException, GameIdNotFoundException {
-        Game game = this.gameService.start(gameId);;
+        Game game = this.gameService.start(gameId);
 
         return ResponseEntity.ok(new KalahResponse(game));
     }
@@ -62,7 +62,7 @@ public class GameController {
         return ResponseEntity.ok(new KalahResponse(game));
     }
 
-    @ApiOperation(value = "List all games") // TODO
+    @ApiOperation(value = "List all games")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     ResponseEntity<KalahResponse<Game>> listGames() {
         Collection<Game> games = this.gameService.list();

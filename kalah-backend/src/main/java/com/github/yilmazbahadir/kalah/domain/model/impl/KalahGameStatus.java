@@ -2,8 +2,6 @@ package com.github.yilmazbahadir.kalah.domain.model.impl;
 
 import com.github.yilmazbahadir.kalah.domain.model.GameStatus;
 import com.github.yilmazbahadir.kalah.domain.model.GameStatusType;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 /**

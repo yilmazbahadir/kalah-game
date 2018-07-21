@@ -2,12 +2,10 @@ package com.github.yilmazbahadir.kalah.domain.model.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.yilmazbahadir.kalah.domain.model.Pit;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
