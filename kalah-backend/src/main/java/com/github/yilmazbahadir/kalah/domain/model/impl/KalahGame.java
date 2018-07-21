@@ -40,7 +40,7 @@ public class KalahGame implements Game {
     @Getter
     private GameConfig config;
     @Getter
-    private GameHistory history; //TODO nice to have
+    private GameHistory history; // nice to have
 
     @JsonIgnore
     private transient GameEventListener eventListener;
@@ -69,7 +69,7 @@ public class KalahGame implements Game {
      */
     @Override
     public synchronized int start() {
-        //TODO if spring cloud eureka is used how would you implement distributed locking mechanism - zookeeper?
+        // if spring cloud eureka is used how would you implement distributed locking mechanism - zookeeper?
         if (this.getStatus().getStatusType() == GameStatusType.NOT_STARTED) {
             this.getStatus().setStatusType(GameStatusType.STARTED);
             this.getStatus().setCurrentPlayer(-1);

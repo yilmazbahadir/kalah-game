@@ -24,7 +24,7 @@ import java.util.Collection;
 @Api(value = "/kalah", description =  "Kalah Game Operations")
 @RequestMapping("/kalah")
 @RestController
-@CrossOrigin(origins = "http://localhost:3060") // TODO change here
+@CrossOrigin(origins = "http://localhost:3060")
 public class GameController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class GameController {
 
     @ApiOperation(value = "Start a game previously created")
     @RequestMapping(value = "/{gameId}/start", method = RequestMethod.GET)
-    ResponseEntity<KalahResponse<Game>> startGame(@PathVariable long gameId) throws NoAvailableSeatsException, GameIdNotFoundException {
+    ResponseEntity<KalahResponse<Game>> startGame(@PathVariable long gameId) throws GameIdNotFoundException {
         Game game = this.gameService.start(gameId);
 
         return ResponseEntity.ok(new KalahResponse(game));
@@ -71,7 +71,7 @@ public class GameController {
     }
 
     @CrossOrigin(origins = "http://localhost:3060")
-    @ApiOperation(value = "Get a game") // TODO
+    @ApiOperation(value = "Get a game")
     @RequestMapping(value = "/{gameId}", method = RequestMethod.GET)
     ResponseEntity<KalahResponse<Game>> getGame(@PathVariable long gameId) throws GameIdNotFoundException {
         Game game = this.gameService.getGame(gameId);

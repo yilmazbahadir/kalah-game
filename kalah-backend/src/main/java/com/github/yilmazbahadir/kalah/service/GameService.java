@@ -106,8 +106,7 @@ public class GameService {
             throw new NoAvailableSeatsException();
         }
 
-        Player player = game.join(playerName);
-        return player;
+        return game.join(playerName);
     }
 
     /**

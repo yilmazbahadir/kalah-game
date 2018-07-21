@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GameControllerExceptionHandler {
 
     @ExceptionHandler(BaseKalahException.class)
-    public ResponseEntity<KalahResponse> handleException(BaseKalahException e) {
+    public ResponseEntity<KalahResponse> handleGameException(BaseKalahException e) {
         return ResponseEntity.badRequest().body( // http status 400
                 KalahResponse.builder()
                     .success(false)
@@ -28,5 +28,12 @@ public class GameControllerExceptionHandler {
                     .message(e.getMessage()).build());
     }
 
-    // TODO Other type of exceptions, NullPointerException etc. ?
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<KalahResponse> handleException(Exception e) {
+        return ResponseEntity.badRequest().body( // http status 400
+                KalahResponse.builder()
+                        .success(false)
+                        .errCode(ErrCode.GenericException.getCode())
+                        .message("Unexpected Error:" + e.getMessage()).build());
+    }
 }

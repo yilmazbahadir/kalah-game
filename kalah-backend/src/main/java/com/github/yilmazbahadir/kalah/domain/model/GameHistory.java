@@ -9,5 +9,5 @@ package com.github.yilmazbahadir.kalah.domain.model;
  * Date:   Jul 2018
  */
 public interface GameHistory extends BaseModel {
-    //TODO nice to have : to be implemented
+    // nice to have : to be implemented
 }
