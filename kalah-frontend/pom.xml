@@ -134,7 +134,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.10</version>
                 <configuration>
-                    <imageName>${project.artifactId}</imageName>
+                    <imageName>bahadiryilmaz/${project.artifactId}</imageName>
                     <baseImage>java:8</baseImage>
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar", "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"]</entryPoint>
                     <resources>

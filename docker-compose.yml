@@ -1,14 +1,14 @@
 version: '3'
 services:
   backend-services:
-    image: kalah-backend
+    image: bahadiryilmaz/kalah-backend
+    deploy:
+          mode: replicated
+          replicas: 1
     ports:
      - "8080:8080"
   frontend:
-    image: kalah-frontend
-    deploy:
-      mode: replicated
-      replicas: 1
+    image: bahadiryilmaz/kalah-frontend
     ports:
     - "3060:3060"
 
