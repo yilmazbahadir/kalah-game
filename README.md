@@ -76,4 +76,31 @@ Kalah-Game multi module project consists of the following modules:
     http://localhost:3060/kalah
     ```
 
+    ![No game found! Create Game](/images/no_game_found.PNG)
+
+2. Create a game
+
+   ```
+   Game is configurable, you can set
+   * Number of players
+   * Number of pits
+   * Number of stones in each pit
+   ```
+   
+   ![Create new Game](/images/create_new_game.PNG)
+
+3. List and join the created game
+
+    ```
+    Set a player name. But inside the game assigned player ID will be used.
+    ```
+    ![Join Game](/images/join_game.PNG)
+
+4. Play game - make a move
+
+    ![Play Game](/images/play_game.PNG)
     
+5. When game is finished
+
+    ![Game is finished](/images/game_finished.PNG)
+
