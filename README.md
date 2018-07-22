@@ -29,15 +29,16 @@ Kalah-Game multi module project consists of the following modules:
 1. Using docker
 
     ```
+    cd kalah-game
+    docker-compose up
+    ```
+    or 
+    
+    ```
     docker run -p8080:8080 bahadiryilmaz/kalah-backend
-    ```
-
-    Backend Swagger UI => http://localhost:8080/swagger-ui.html
-
-    ```
     docker run -p3060:3060 bahadiryilmaz/kalah-frontend
     ```
-
+    Backend Swagger UI => http://localhost:8080/swagger-ui.html
     Frontend => http://localhost:3060/kalah
 
 2. Build from source
