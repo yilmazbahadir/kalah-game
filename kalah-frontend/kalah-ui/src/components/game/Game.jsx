@@ -104,7 +104,10 @@ class Game extends React.Component {
 
 const Pit = (props) => (
   <div className={props.type == 'HOUSE' ? 'house' : 'pit'} onClick={() => (props.onClick(props.index))}>
-    <span>#{props.index} </span>
+    { 
+      props.type != 'HOUSE' &&
+      <span>#{props.index} </span>
+    }
     <div> {props.numOfStones} </div>
   </div>
 )
@@ -128,7 +131,9 @@ const GameStatus = (props) => (
       <span>Player {props.currentPlayer} has played. </span>
     }
     <br/>
-    <span>Next player is {props.nextPlayer} </span>
+    { props.nextPlayer > -1 && 
+      <span>Next player is {props.nextPlayer} </span>
+    }
     <br/>
     <div> Game status: {props.statusType} </div>
     <br/>
@@ -143,7 +148,7 @@ const GameStatus = (props) => (
     { props.currentPlayer == props.nextPlayer &&
         <div>
           <MessagePrompter id='gameStatusMessage' open={true} 
-            message={'Player #' + props.currentPlayer + ' have a free turn!'}  type='success'/>
+            message={props.currentPlayer == props.viewer ? 'You have a free turn!' : ('Player #' + props.currentPlayer + ' have a free turn!')}  type='success'/>
         </div>
     }
   </div>
