@@ -59,7 +59,7 @@ class Game extends React.Component {
     return ( <div>
       { messageContent }
       { 
-        data.board.sides.slice().sort((a, b) => a.sideId != viewer ? a.sideId : b.sideId).map((side) => (
+        data.board.sides.slice().sort((a, b) => a.sideId != viewer ? -1 : 1).map((side) => (
           <div key={'side_div' + side.sideId} >
             <Side key={'side' + side.sideId} id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != viewer} currentPlayer={data.status.nextPlayer}
               onClick={(pitInx) => this.props.play(this.state.gameId, viewer, pitInx)} 
