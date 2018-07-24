@@ -24,7 +24,7 @@ function _renderBrand (brand) {
             href={brand.url}
             className="navbar-item is-size-3">
             <img src={icon} height={64} width={64}/>
-            <span>{brand.label}</span>
+            <span style={{marginLeft:'10px'}}>{brand.label}</span>
         </a>
     );
 }

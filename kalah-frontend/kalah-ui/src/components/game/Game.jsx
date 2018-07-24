@@ -60,8 +60,8 @@ class Game extends React.Component {
       { messageContent }
       { 
         data.board.sides.slice().sort((a, b) => a.sideId != viewer ? a.sideId : b.sideId).map((side) => (
-          <div>
-            <Side id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != viewer} currentPlayer={data.status.nextPlayer}
+          <div key={'side_div' + side.sideId} >
+            <Side key={'side' + side.sideId} id={side.sideId} pits={side.pits} house={side.house} opposite={side.sideId != viewer} currentPlayer={data.status.nextPlayer}
               onClick={(pitInx) => this.props.play(this.state.gameId, viewer, pitInx)} 
               isWinner={data.status.statusType === 'FINISHED' ? this.getWinner(data) == side.sideId : false}/>
           <br/>
@@ -113,11 +113,11 @@ const Pit = (props) => (
 )
 
 const Side = (props) => (
-  <div id={props.id} className={ 'side' + (props.opposite ? ' opposite' : '') + (props.currentPlayer == props.id ? ' playing' : '') + (props.isWinner ? ' winner' : '') }>
+  <div key={'side' + props.id} className={ 'side' + (props.opposite ? ' opposite' : '') + (props.currentPlayer == props.id ? ' playing' : '') + (props.isWinner ? ' winner' : '') }>
       <span style={{ whiteSpace: 'nowrap' }}>Player #{props.id} </span>
       {
         props.pits.map(
-          (p) => (<Pit type={p.type} index={p.index} numOfStones={p.numOfStones} 
+          (p) => (<Pit key={'pit' + p.index} type={p.type} index={p.index} numOfStones={p.numOfStones} 
             onClick={props.opposite ? () => alert('Play on your side!') : props.onClick}/>)
         )
       }
