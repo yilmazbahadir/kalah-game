@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>com.github.yilmazbahadir.kalah.com.github.yilmazbahadir.kalah.ui.KalahGameUIApp</start-class>
+        <start-class>com.github.yilmazbahadir.kalah.ui.KalahGameUIApp</start-class>
         <java.version>1.8</java.version>
         <spring.boot.version>2.0.3.RELEASE</spring.boot.version>
     </properties>
