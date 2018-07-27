@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: false
+    fetchRegistry: true
+
+zuul:
+  routes:
+    kalah-game-service:
+      path: /**
+      sensitive-headers: Set-Cookie,Authorization
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 67000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 30000

@@ -1,0 +1,17 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+logging:
+  file = ./log/kalah.log
+
+spring:
+  application:
+    name: kalah-game-service
+server:
+  port: 0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+    preferIpAddress: true
+  instance:
+      instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

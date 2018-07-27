@@ -44,8 +44,10 @@ public interface Game extends BaseModel {
 
     public List<Player> getPlayers();
 
+    public void setEventListener(GameEventListener eventListener);
+
     @FunctionalInterface
-    public interface GameEventListener {
+    public interface GameEventListener extends Serializable{
         public void handle(GameEvent e);
     }
 

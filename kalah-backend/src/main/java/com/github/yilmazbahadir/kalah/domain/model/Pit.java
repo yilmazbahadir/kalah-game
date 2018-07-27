@@ -35,7 +35,7 @@ public interface Pit extends BaseModel {
     }
 
     @FunctionalInterface
-    public interface PitChangeListener {
+    public interface PitChangeListener extends Serializable{
         public void handle(PitEvent e);
     }
 

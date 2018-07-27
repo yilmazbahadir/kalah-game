@@ -25,7 +25,7 @@ public class KalahPit implements Pit {
     private int index;
     private AtomicInteger numOfStones;
     @JsonIgnore
-    private transient PitChangeListener listener;
+    private PitChangeListener listener;
 
     public KalahPit(int numOfStones, int index, PitChangeListener listener) {
         this.numOfStones = new AtomicInteger(numOfStones);

@@ -63,13 +63,17 @@ public class KalahGame implements Game {
         this.players = new CopyOnWriteArrayList<>();
     }
 
+    public void setEventListener(GameEventListener eventListener) {
+        this.eventListener = eventListener;
+    }
+
     /**
      * Decides which player should start(strategy: random) and starts the game
      * @return next player
      */
     @Override
     public synchronized int start() {
-        // if spring cloud eureka is used how would you implement distributed locking mechanism - zookeeper?
+        // if spring cloud eureka is used how would you implement distributed locking mechanism
         if (this.getStatus().getStatusType() == GameStatusType.NOT_STARTED) {
             this.getStatus().setStatusType(GameStatusType.STARTED);
             this.getStatus().setCurrentPlayer(-1);
@@ -89,7 +93,7 @@ public class KalahGame implements Game {
      * @throws InvalidPitIndexException
      */
     @Override
-    public synchronized GameStatus play(final int playerId, final int pitInx) throws GameStatusException, PlayerInvalidTurnException, WrongMoveException, InvalidPitIndexException {
+    public synchronized GameStatus play(int playerId, int pitInx) throws GameStatusException, PlayerInvalidTurnException, WrongMoveException, InvalidPitIndexException {
 
         this.checkPlayValidations(playerId, pitInx);
 

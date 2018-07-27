@@ -3,6 +3,9 @@ package com.github.yilmazbahadir.kalah.service;
 import com.github.yilmazbahadir.kalah.domain.model.*;
 import com.github.yilmazbahadir.kalah.domain.model.impl.KalahGame;
 import com.github.yilmazbahadir.kalah.exception.*;
+import com.hazelcast.config.Config;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -36,7 +39,8 @@ public class GameService {
 
     @PostConstruct
     public void init() {
-        this.gamesMap = new ConcurrentHashMap<>();
+        HazelcastInstance hz = Hazelcast.newHazelcastInstance(new Config());
+        this.gamesMap = hz.getMap("games");
     }
 
     /**
@@ -73,7 +77,7 @@ public class GameService {
             throw new GameIdNotFoundException(gameId);
         }
         game.start();
-
+        this.gamesMap.put(gameId, game);
         return game;
     }
 
@@ -105,8 +109,10 @@ public class GameService {
         if(game.getPlayers().size() == game.getConfig().getNumOfPlayers()) {
             throw new NoAvailableSeatsException();
         }
-
-        return game.join(playerName);
+        game.setEventListener(this::sendGameEvent);
+        Player player = game.join(playerName);
+        this.gamesMap.put(gameId, game);
+        return player;
     }
 
     /**
@@ -122,7 +128,7 @@ public class GameService {
         if (game == null) {
             throw new GameIdNotFoundException(gameId);
         }
-
+        game.setEventListener(this::sendGameEvent);
         game.leave(playerId);
         return game;
     }
@@ -168,9 +174,9 @@ public class GameService {
         if (game == null) {
             throw new GameIdNotFoundException(gameId);
         }
-
+        game.setEventListener(this::sendGameEvent);
         game.play(playerId, pitInx);
-
+        this.gamesMap.put(gameId, game);
         return game;
     }
 
