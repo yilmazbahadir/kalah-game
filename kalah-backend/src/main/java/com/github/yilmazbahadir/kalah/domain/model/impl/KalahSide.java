@@ -20,6 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ToString
 public class KalahSide implements Side {
 
+    private static final long serialVersionUID = -6376097320685913826L;
+    
     private long sideId;
     private Pit house;
     private Pit[] pits;

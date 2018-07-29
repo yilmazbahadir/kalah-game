@@ -17,6 +17,8 @@ import lombok.ToString;
 @ToString
 public class KalahBoard implements Board {
 
+    private static final long serialVersionUID = -6156649693688013482L;
+
     private Side[] sides;
 
 

@@ -17,6 +17,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class KalahPlayer implements Player {
 
+    private static final long serialVersionUID = 7827181737961530565L;
+
     private int id;
     private String name;
 

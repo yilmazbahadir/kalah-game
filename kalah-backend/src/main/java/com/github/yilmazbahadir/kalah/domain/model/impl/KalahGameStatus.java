@@ -13,6 +13,8 @@ import lombok.ToString;
 @ToString
 public class KalahGameStatus implements GameStatus {
 
+    private static final long serialVersionUID = -2180814633373595106L;
+
     private int currentPlayer;
     private int nextPlayer;
     private GameStatusType statusType;

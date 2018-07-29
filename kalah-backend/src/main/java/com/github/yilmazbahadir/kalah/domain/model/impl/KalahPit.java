@@ -19,6 +19,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ToString
 public class KalahPit implements Pit {
 
+    private static final long serialVersionUID = 8219442495529490152L;
+
     private PitType type = PitType.NORMAL;
 
     @Getter

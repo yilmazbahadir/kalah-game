@@ -27,6 +27,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ToString
 public class KalahGame implements Game {
 
+    private static final long serialVersionUID = -8315312605976346387L;
+    
     @Getter
     private long id;
     @Getter

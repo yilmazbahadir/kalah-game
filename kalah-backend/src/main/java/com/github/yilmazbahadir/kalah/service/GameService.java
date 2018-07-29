@@ -174,7 +174,8 @@ public class GameService {
         if (game == null) {
             throw new GameIdNotFoundException(gameId);
         }
-        game.setEventListener(this::sendGameEvent);
+        game.setEventListener(this::sendGameEvent); // since sendGameEvent - SimpMessagingTemplate is not Serializable
+        // we need to set listener after we get the game
         game.play(playerId, pitInx);
         this.gamesMap.put(gameId, game);
         return game;

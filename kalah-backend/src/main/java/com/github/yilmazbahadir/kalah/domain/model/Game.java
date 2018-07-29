@@ -54,6 +54,8 @@ public interface Game extends BaseModel {
     @Getter
     @Setter
     public class GameEvent implements Serializable {
+        private static final long serialVersionUID = 8007316099617479475L;
+
         private GameEventType type;
         private Game game;
     }

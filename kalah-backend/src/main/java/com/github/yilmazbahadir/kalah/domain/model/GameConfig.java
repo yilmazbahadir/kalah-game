@@ -23,6 +23,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class GameConfig implements Serializable {
 
+    private static final long serialVersionUID = -2671702752038961736L;
+
     private static final int DEFAULT_NUM_OF_PITS = 6;
     private static final int DEFAULT_NUM_OF_STONES_IN_EACH_PIT = 6;
     private static final int DEFAULT_NUM_OF_PLAYERS = 2;
