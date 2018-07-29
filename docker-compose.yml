@@ -1,14 +1,29 @@
 version: '3'
 services:
+  service-registry:
+    image: bahadiryilmaz/kalah-service-registry
+    ports:
+    - "8761:8761"
   backend-services:
     image: bahadiryilmaz/kalah-backend
     deploy:
           mode: replicated
           replicas: 1
+    depends_on:
+    - service-registry
+
+  service-gateway:
+    image: bahadiryilmaz/kalah-service-gateway
     ports:
-     - "8080:8080"
+    - "8080:8080"
+    depends_on:
+    - service-registry
+    - backend-services
+
   frontend:
     image: bahadiryilmaz/kalah-frontend
     ports:
     - "3060:3060"
+    depends_on:
+    - service-gateway
 

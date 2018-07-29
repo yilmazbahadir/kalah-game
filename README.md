@@ -20,13 +20,20 @@ Kalah-Game multi module project consists of the following modules:
 * kalah-backend : spring boot, maven, junit, lombok, docker, swagger, aspect, websocket (spring cloud - not implemented yet)
 * kalah-frontend : spring boot, maven
     * kalah-ui : react, node, npm, webpack, websocket(sockjs, stompjs)
-* kalah-service-gateway: spring cloud(eureka, zuul, config) - not implemented yet
+* kalah-service-registry: spring registry - netflix eureka
+* kalah-service-gateway: spring gateway - netflix zuul 
 
+
+```
+Microservices components are implemented in this branch (feature/kalah-cloud-services). The reason to prepare this branch is
+to provide scalibity and ease of management in microservices environment. kalah-backend services can be scaled up to manage the load.
+Each instance of kalah-backend will register itself to kalah-service-registry. And will be accessible through kalah-service-gateway.
+```
 
 ## Usage
 
 
-1. Using docker
+1. Using docker (not available for now, work in progress)
 
     ```
     cd kalah-game
@@ -56,9 +63,15 @@ Kalah-Game multi module project consists of the following modules:
     cd kalah-game
     mvn clean install
 
+    cd ./kalah-service-registry/target
+    java -jar kalah-service-registry-1.0-SNAPSHOT.jar
+    
     cd ./kalah-backend/target
     java -jar kalah-backend-1.0-SNAPSHOT.jar
 
+    cd ./kalah-service-gateway/target
+    java -jar kalah-service-gateway-1.0-SNAPSHOT.jar
+    
     cd ./kalah-frontend/target
     java -jar kalah-frontend-1.0-SNAPSHOT.jar
     ```
