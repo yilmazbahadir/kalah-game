@@ -25,9 +25,11 @@ Kalah-Game multi module project consists of the following modules:
 
 
 ```
-Microservices components are implemented in this branch (feature/kalah-cloud-services). The reason to prepare this branch is
-to provide scalibity and ease of management in microservices environment. kalah-backend services can be scaled up to manage the load.
-Each instance of kalah-backend will register itself to kalah-service-registry. And will be accessible through kalah-service-gateway.
+Microservices components are implemented in this branch (feature/kalah-cloud-services). 
+The reason to prepare this branch is to provide scalibity and ease of management in microservices environment. 
+kalah-backend services can be scaled up to manage the load. Each instance of kalah-backend will register itself 
+to kalah-service-registry. And will be accessible through kalah-service-gateway.
+Swagger UI's are aggregated on gateway. And accessiable through localhost:8080/swagger-ui.html
 ```
 
 ## Usage
