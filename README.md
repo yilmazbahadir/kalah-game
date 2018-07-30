@@ -35,7 +35,7 @@ Swagger UI's are aggregated on gateway. And accessiable through localhost:8080/s
 ## Usage
 
 
-1. Using docker (not available for now, work in progress)
+1. Using docker
 
     ```
     cd kalah-game
@@ -44,9 +44,12 @@ Swagger UI's are aggregated on gateway. And accessiable through localhost:8080/s
     or 
     
     ```
-    docker run -p8080:8080 bahadiryilmaz/kalah-backend
-    docker run -p3060:3060 bahadiryilmaz/kalah-frontend
+    docker run -p 8080:8080 -p 3060:3060 -p 8761:8761 bahadiryilmaz/kalah-cloud-all
     ```
+   
+    https://hub.docker.com/r/bahadiryilmaz/
+    
+    
     Backend Swagger UI => http://localhost:8080/swagger-ui.html
     Frontend => http://localhost:3060/kalah
 
