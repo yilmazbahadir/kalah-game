@@ -2,6 +2,7 @@ version: '3'
 services:
   service-registry:
     image: bahadiryilmaz/kalah-service-registry
+    hostname: service-registry
     ports:
     - "8761:8761"
   backend-services:
@@ -9,6 +10,8 @@ services:
     deploy:
           mode: replicated
           replicas: 1
+    environment:
+    - EUREKA_URI=http://service-registry:8761/eureka
     depends_on:
     - service-registry
 
@@ -16,6 +19,8 @@ services:
     image: bahadiryilmaz/kalah-service-gateway
     ports:
     - "8080:8080"
+    environment:
+    - EUREKA_URI=http://service-registry:8761/eureka
     depends_on:
     - service-registry
     - backend-services
